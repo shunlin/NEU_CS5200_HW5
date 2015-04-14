@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<a href="api/site">Find All Sites</a>
+<br/>
+<a href="api/site/1">Find Site with ID = 1</a>
+<br/>
+<a href="api/site/2">Find Site with ID = 2</a>
+
+<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+
+<script>
+	$(function()
+	{
+		var site =
+		{
+				id: null,
+				name: "Site 4",
+				latitude: 12.34,
+				longitude: 56.78
+		};
+//		createSite(site);
+//		updateSite(4, site);
+		removeSite(4);
+	});
+	
+	function updateSite(id, site)
+	{
+		$.ajax(
+		{
+			url: "api/site/"+id,
+			data: JSON.stringify(site),
+			type: "put",
+			dataType: "json",
+			contentType: "application/json",
+			success: function(response) {
+				console.log(response);
+			},
+			error: function(response) {
+				console.log(response);
+			}
+		});
+	}
+	
+	function removeSite(id)
+	{
+		$.ajax(
+		{
+			url: "api/site/"+id,
+			type: "delete",
+			dataType: "json",
+			contentType: "application/json",
+			success: function(response) {
+				console.log(response);
+			},
+			error: function(response) {
+				console.log(response);
+			}
+		});
+	}
+	
+	function createSite(site)
+	{
+		$.ajax(
+		{
+			url: "api/site",
+			data: JSON.stringify(site),
+			type: "post",
+			dataType: "json",
+			contentType: "application/json",
+			success: function(response) {
+				console.log(response);
+			},
+			error: function(response) {
+				console.log(response);
+			}
+		});
+	}
+</script>
+</body>
+</html>
